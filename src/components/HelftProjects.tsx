@@ -75,7 +75,7 @@ export default function HelftProjects() {
   const [selectedService, setSelectedService] = useState<string | null>(null);
 
   return (
-    <section id="projects" className="w-full py-16 px-8 max-w-7xl mx-auto space-y-12">
+    <section id="projects" className="w-full py-16 px-6 sm:px-8 max-w-7xl mx-auto space-y-12">
       {/* Section Title (Helft & Pinta Architectural Header) */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b border-border pb-6 gap-4">
         <div>
@@ -91,22 +91,33 @@ export default function HelftProjects() {
         </p>
       </div>
 
-      {/* Helft & Pinta Loop Projets Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        {PROJECTS_DATA.map((item) => (
+      {/* Featured Projects: Stacking Cards on Mobile, 2-Column Grid on Desktop */}
+      <div className="flex flex-col gap-8 md:grid md:grid-cols-2 md:gap-10 relative">
+        {PROJECTS_DATA.map((item, idx) => (
           <div
             key={item.id}
             onClick={() => setSelectedService(item.serviceKey)}
-            className="group cursor-pointer space-y-4"
+            style={{
+              top: `calc(75px + ${idx * 16}px)`,
+            }}
+            className="group cursor-pointer space-y-3 sticky md:static rounded-3xl bg-background/95 md:bg-transparent p-4 sm:p-5 md:p-0 border border-border/80 md:border-0 shadow-xl md:shadow-none transition-all duration-300 active:scale-[0.98] md:active:scale-100"
           >
+            {/* Card Index & Badge (Mobile Stack Marker) */}
+            <div className="flex md:hidden items-center justify-between text-xs font-mono font-bold text-brand-600 pb-1">
+              <span>0{idx + 1} / 0{PROJECTS_DATA.length}</span>
+              <span className="uppercase tracking-widest text-[10px] bg-brand-600/10 px-2.5 py-0.5 rounded-full border border-brand-600/20">
+                {item.year}
+              </span>
+            </div>
+
             {/* Cover Image Container with Hover Scale */}
             <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden bg-stone-900 shadow-sm border border-border group-hover:shadow-2xl group-hover:border-brand-600/50 transition-all duration-500">
               <div
-                className={`w-full h-full bg-gradient-to-br ${item.gradient} p-8 flex flex-col justify-between text-white group-hover:scale-105 transition-transform duration-700`}
+                className={`w-full h-full bg-gradient-to-br ${item.gradient} p-6 sm:p-8 flex flex-col justify-between text-white group-hover:scale-105 transition-transform duration-700`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-4xl select-none">{item.iconSymbol}</span>
-                  <span className="text-xs font-mono font-bold tracking-widest bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
+                  <span className="text-3xl sm:text-4xl select-none">{item.iconSymbol}</span>
+                  <span className="hidden md:inline-block text-xs font-mono font-bold tracking-widest bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
                     {item.year}
                   </span>
                 </div>
@@ -115,7 +126,7 @@ export default function HelftProjects() {
                   <span className="text-brand-300 text-xs font-mono uppercase tracking-wider">
                     {item.category}
                   </span>
-                  <h3 className="text-xl sm:text-2xl font-bold font-heading text-white line-clamp-2">
+                  <h3 className="text-lg sm:text-2xl font-bold font-heading text-white line-clamp-2">
                     {item.title}
                   </h3>
                 </div>
@@ -130,10 +141,10 @@ export default function HelftProjects() {
 
             {/* Helft & Pinta Minimalist Caption */}
             <div className="space-y-1 pt-1">
-              <h2 className="text-xl sm:text-2xl font-bold text-brand-600 font-heading group-hover:text-brand-700 transition-colors leading-snug">
+              <h2 className="text-lg sm:text-2xl font-bold text-brand-600 font-heading group-hover:text-brand-700 transition-colors leading-snug">
                 {item.title}
               </h2>
-              <h3 className="text-black text-sm font-serif italic">
+              <h3 className="text-black text-xs sm:text-sm font-serif italic">
                 {item.category}
               </h3>
             </div>

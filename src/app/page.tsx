@@ -7,7 +7,7 @@ import HelixMarquee from "@/components/HelixMarquee";
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col bg-background text-foreground overflow-x-hidden">
+    <main className="min-h-screen flex flex-col bg-background text-foreground overflow-x-clip">
       <Header />
       <div className="flex-1 space-y-12">
         <HelftHero />
