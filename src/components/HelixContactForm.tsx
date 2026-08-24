@@ -69,16 +69,16 @@ export default function HelixContactForm() {
             <div className="bg-brand-600/10 border border-brand-600/30 p-8 sm:p-10 rounded-2xl text-center space-y-4 animate-fade-up">
               <CheckCircle className="w-12 h-12 text-brand-600 mx-auto" />
               <h3 className="text-2xl font-bold text-brand-600 font-heading">
-                Request Received!
+                Thank You for Reaching Out!
               </h3>
-              <p className="text-black text-sm sm:text-base font-serif max-w-md mx-auto">
-                Thank you for contacting Pen Crack regarding <strong>{formData.service}</strong>. Our senior editorial director will review your specifications and contact you within 24 hours.
+              <p className="text-black text-base font-serif max-w-md mx-auto">
+                Your message has been received. Our editorial director will review your brief and reply within 24 hours.
               </p>
               <button
                 onClick={() => setSubmitted(false)}
                 className="mt-2 px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-semibold font-heading transition-colors shadow-sm"
               >
-                Submit Another Message
+                Send Another Message
               </button>
             </div>
           ) : (
