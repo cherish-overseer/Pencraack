@@ -13,7 +13,6 @@ export default function HelixAboutHero() {
 
         {/* Main Animated Title */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-brand-600 font-heading leading-tight tracking-tight">
-          This is <br className="hidden sm:block" />
           <span className="bg-gradient-to-r from-brand-600 via-brand-700 to-brand-900 bg-clip-text text-transparent">
             PEN CRACK EDITORIAL STUDIO
           </span>

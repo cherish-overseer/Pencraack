@@ -61,7 +61,7 @@ export default function HelixContactForm() {
               Have Any Project on Your Mind?
             </h2>
             <p className="text-black text-base sm:text-lg font-serif max-w-xl mx-auto">
-              Great! We're excited to hear from you. Fill out the form below to kickstart your editorial project.
+              Great! We're excited to hear from you. Fill out the form below to kickstart your project.
             </p>
           </div>
 
