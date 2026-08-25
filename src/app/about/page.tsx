@@ -4,7 +4,6 @@ import HelixAboutHero from "@/components/HelixAboutHero";
 import HelixPillars from "@/components/HelixPillars";
 import HelixProcess from "@/components/HelixProcess";
 import HelixWhyUs from "@/components/HelixWhyUs";
-import HelixTimeline from "@/components/HelixTimeline";
 import CtaBanner from "@/components/CtaBanner";
 
 export const metadata = {
@@ -21,7 +20,6 @@ export default function AboutPage() {
         <HelixPillars />
         <HelixProcess />
         <HelixWhyUs />
-        <HelixTimeline />
         <CtaBanner />
       </div>
       <Footer />
