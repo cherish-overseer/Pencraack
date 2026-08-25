@@ -24,7 +24,7 @@ export default function HelixContactHero() {
 
         {/* Subtitle (Black Body Text) */}
         <p className="text-black text-lg sm:text-xl font-serif leading-relaxed">
-          Have a project brief, an academic manuscript, or a corporate inquiry? Connect with our editorial directors today to discuss your vision.
+          Have a project brief, academic manuscript, or corporate request? Reach out to our editorial team today to share your ideas and explore how we can bring your vision to life.
         </p>
       </div>
     </section>
