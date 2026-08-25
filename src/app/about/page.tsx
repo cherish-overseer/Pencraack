@@ -3,7 +3,6 @@ import Footer from "@/components/Footer";
 import HelixAboutHero from "@/components/HelixAboutHero";
 import HelixPillars from "@/components/HelixPillars";
 import HelixProcess from "@/components/HelixProcess";
-import HelixMetrics from "@/components/HelixMetrics";
 import HelixWhyUs from "@/components/HelixWhyUs";
 import HelixTimeline from "@/components/HelixTimeline";
 import CtaBanner from "@/components/CtaBanner";
@@ -21,7 +20,6 @@ export default function AboutPage() {
         <HelixAboutHero />
         <HelixPillars />
         <HelixProcess />
-        <HelixMetrics />
         <HelixWhyUs />
         <HelixTimeline />
         <CtaBanner />
