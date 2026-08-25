@@ -1,6 +1,6 @@
 "use client";
 
-import { Heart, Sparkles, Award } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 export default function HelixWhyUs() {
   return (
@@ -18,9 +18,8 @@ export default function HelixWhyUs() {
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-brand-700 font-heading flex items-center gap-2">
-              <Heart className="w-5 h-5 text-brand-600 fill-brand-600/20" />
-              <span>We Love What We Do</span>
+            <h3 className="text-xl font-bold text-brand-700 font-heading">
+              We Love What We Do
             </h3>
             <p className="text-black text-base leading-relaxed font-serif">
               We are an editorial agency working closely with authors, academics, and enterprise teams. We build insightful content strategies, refine unique voices, and craft lasting value in every manuscript.
@@ -28,9 +27,8 @@ export default function HelixWhyUs() {
           </div>
 
           <div className="space-y-4 pt-2">
-            <h3 className="text-xl font-bold text-brand-700 font-heading flex items-center gap-2">
-              <Award className="w-5 h-5 text-brand-600" />
-              <span>Why Work With Us</span>
+            <h3 className="text-xl font-bold text-brand-700 font-heading">
+              Why Work With Us
             </h3>
             <p className="text-black text-base leading-relaxed font-serif">
               If you ask our clients what it's like working with Pen Crack, they'll talk about how deeply we care about their success. For us, authentic editorial partnerships fuel real academic and commercial achievements.
