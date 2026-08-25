@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 export default function HelixAboutHero() {
   return (
@@ -10,11 +10,6 @@ export default function HelixAboutHero() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-brand-500/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 text-center max-w-4xl mx-auto space-y-8 animate-fade-up">
-        {/* Category Pill */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-600/10 border border-brand-600/20 text-brand-600 text-xs font-semibold uppercase tracking-widest">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Premier Editorial & Research Studio</span>
-        </div>
 
         {/* Main Animated Title */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-brand-600 font-heading leading-tight tracking-tight">
