@@ -159,14 +159,11 @@ export default function ComicBrowseView() {
       <div className="space-y-4 text-center sm:text-left border-b border-border pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-600/10 text-brand-600 text-xs font-semibold uppercase tracking-wider">
           <BookOpen className="w-3.5 h-3.5" />
-          <span>Graphics & Webtoons</span>
+          <span>Webtoons</span>
         </div>
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-brand-600 font-heading">
-          Browse Comics & Graphic Novels
+          Browse Comics & Novels
         </h1>
-        <p className="text-black text-base sm:text-lg font-serif max-w-2xl">
-          Explore Pen Crack's curated library of serialized webtoons, action manhwa, and illustrated literary comics.
-        </p>
       </div>
 
       {/* Search & Filter Bar (Asura Scans Style) */}
