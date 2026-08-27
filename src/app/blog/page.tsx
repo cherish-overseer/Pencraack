@@ -23,12 +23,8 @@ export default function BlogPage() {
           </div>
 
           <h1 className="text-4xl sm:text-6xl font-extrabold text-brand-600 font-heading">
-            Pen Crack Blog & Essays
+            Blog & Essays
           </h1>
-
-          <p className="text-black text-lg sm:text-xl font-serif max-w-2xl mx-auto">
-            Deep-dives into academic research methods, literary craft, commercial copywriting, and publishing trends.
-          </p>
         </section>
 
         <BlogFeaturedHero />
