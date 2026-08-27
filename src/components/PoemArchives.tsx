@@ -105,9 +105,6 @@ export default function PoemArchives() {
           <h2 className="text-3xl sm:text-4xl font-bold text-brand-600 font-heading">
             Explore More Poems & Verses
           </h2>
-          <p className="text-black text-base font-serif max-w-xl">
-            Browse Pen Crack's curated collection of contemporary poetry, classical sonnets, and literary reflections.
-          </p>
         </div>
 
         {/* Filter Controls */}
