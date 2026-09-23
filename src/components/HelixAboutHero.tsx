@@ -20,7 +20,7 @@ export default function HelixAboutHero() {
 
         {/* Hero Narrative (Black Body Text) */}
         <p className="text-black text-lg sm:text-xl md:text-2xl font-serif max-w-3xl mx-auto leading-relaxed">
-          Pen Crack is a trailblazing remote-first writing and editorial studio dedicated to propelling authors, researchers, and enterprises towards success. We seamlessly integrate academic precision, commercial strategy, and creative literature.
+          Pen Crack is a writing and editorial studio dedicated to propelling authors, researchers, and enterprises towards success. We seamlessly integrate academic precision, commercial strategy, and creative literature.
         </p>
 
         {/* Action Buttons */}
