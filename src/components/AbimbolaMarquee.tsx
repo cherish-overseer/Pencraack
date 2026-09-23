@@ -12,17 +12,8 @@ export default function AbimbolaMarquee() {
   ];
 
   return (
-    <div className="w-full space-y-0">
-      {/* Statement Quote Banner */}
-      <section className="py-16 md:py-20 bg-surface text-center border-b border-border">
-        <div className="max-w-7xl mx-auto px-6">
-          <p className="font-heading text-3xl sm:text-4xl md:text-5xl text-black italic leading-snug">
-            God Inspires. <span className="text-brand-600 font-extrabold not-italic">We write.</span>
-          </p>
-        </div>
-      </section>
-
-      {/* Brand Brown Marquee Banner (same as Service Page) */}
+    <div className="w-full">
+      {/* Brand Brown Marquee Banner */}
       <section className="w-full bg-brand-600 text-white py-4 overflow-hidden border-y border-brand-700 shadow-inner select-none">
         <div className="flex whitespace-nowrap animate-marquee">
           {[...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, idx) => (
