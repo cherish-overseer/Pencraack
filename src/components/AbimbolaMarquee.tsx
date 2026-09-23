@@ -1,13 +1,14 @@
 "use client";
 
+import { Sparkles } from "lucide-react";
+
 export default function AbimbolaMarquee() {
-  const statements = [
-    "Clarity before Commitment",
-    "A Studio with a Pen and a Purpose",
-    "God Inspires. We write.",
-    "Know Your Story Before You Publish",
-    "Academic Rigor & Creative Artistry",
-    "Whatever You Need, Written Right",
+  const marqueeItems = [
+    "We Guarantee Unparalleled Editorial Rigor",
+    "Academic Integrity & Creative Excellence",
+    "Fast, 100% Plagiarism-Free Delivery",
+    "Dedicated Account & Editorial Directors",
+    "Tailored Literary & Commercial Solutions",
   ];
 
   return (
@@ -21,30 +22,18 @@ export default function AbimbolaMarquee() {
         </div>
       </section>
 
-      {/* Black Starburst Marquee */}
-      <section className="bg-black py-4.5 overflow-hidden select-none">
-        <div className="flex w-max animate-marquee">
-          <div className="flex items-center gap-8 px-4 whitespace-nowrap">
-            {statements.map((phrase, idx) => (
-              <span key={idx} className="flex items-center gap-8">
-                <span className="text-white/90 text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase font-mono">
-                  {phrase}
-                </span>
-                <span className="text-[#c9963f] text-base">✦</span>
-              </span>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-8 px-4 whitespace-nowrap" aria-hidden="true">
-            {statements.map((phrase, idx) => (
-              <span key={`dup-${idx}`} className="flex items-center gap-8">
-                <span className="text-white/90 text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase font-mono">
-                  {phrase}
-                </span>
-                <span className="text-[#c9963f] text-base">✦</span>
-              </span>
-            ))}
-          </div>
+      {/* Brand Brown Marquee Banner (same as Service Page) */}
+      <section className="w-full bg-brand-600 text-white py-4 overflow-hidden border-y border-brand-700 shadow-inner select-none">
+        <div className="flex whitespace-nowrap animate-marquee">
+          {[...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, idx) => (
+            <div
+              key={idx}
+              className="flex items-center gap-6 mx-6 text-sm font-semibold tracking-wider uppercase font-heading"
+            >
+              <Sparkles className="w-4 h-4 text-brand-400 shrink-0" />
+              <span>{item}</span>
+            </div>
+          ))}
         </div>
       </section>
     </div>
