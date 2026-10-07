@@ -20,8 +20,8 @@
   --r: 18px; 
   --r-sm: 12px; 
   --r-lg: 26px;
-  --sans: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --sans: var(--font-inter), 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --serif: var(--font-fraunces), 'Fraunces', Georgia, 'Times New Roman', serif;
 }
 
 * {
@@ -36,6 +36,7 @@ html {
 
 body {
   font-family: var(--sans);
+  font-size: 16px;
   background: var(--cream);
   color: var(--ink);
   line-height: 1.6;
@@ -79,6 +80,96 @@ button {
 
 section {
   scroll-margin-top: 90px;
+}
+
+/* ---------- Typography & Scale ---------- */
+.eyebrow {
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: 12.5px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.tag {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--beige);
+  color: var(--brown-600);
+}
+
+.badge {
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.badge.pub {
+  background: #e4f0e6;
+  color: #3f7a4d;
+}
+
+.badge.draft {
+  background: var(--beige);
+  color: var(--brown-600);
+}
+
+/* section heads */
+.sec-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 26px;
+}
+
+.sec-head h2 {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3.4vw, 38px);
+  font-weight: 600;
+  color: var(--brown);
+  line-height: 1.1;
+}
+
+.sec-head p {
+  color: var(--muted);
+  margin-top: 6px;
+  max-width: 520px;
+}
+
+.sec-pad {
+  padding: 66px 0;
+}
+
+.link-all {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--brown-600);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: .15s;
+}
+
+.link-all:hover {
+  color: var(--brown);
 }
 
 /* ---------- Buttons ---------- */
@@ -143,76 +234,6 @@ section {
 .btn-block {
   width: 100%;
   justify-content: center;
-}
-
-.pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12.5px;
-  font-weight: 600;
-  padding: 5px 12px;
-  border-radius: 999px;
-  background: var(--beige);
-  color: var(--brown-600);
-}
-
-.tag {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: .08em;
-}
-
-/* section heads */
-.sec-head {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 26px;
-}
-
-.sec-head h2 {
-  font-family: var(--serif);
-  font-size: clamp(26px, 3.4vw, 38px);
-  font-weight: 600;
-  color: var(--brown);
-  line-height: 1.1;
-}
-
-.sec-head p {
-  color: var(--muted);
-  margin-top: 6px;
-  max-width: 520px;
-}
-
-.sec-pad {
-  padding: 66px 0;
-}
-
-.link-all {
-  font-weight: 600;
-  color: var(--brown-600);
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  white-space: nowrap;
-  cursor: pointer;
-}
-
-.link-all:hover {
-  color: var(--brown);
-}
-
-.eyebrow {
-  font-weight: 700;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  font-size: 12.5px;
-  color: var(--accent);
-  margin-bottom: 12px;
 }
 
 /* ---------- NAV ---------- */
@@ -412,6 +433,7 @@ section {
   color: var(--brown-700);
   margin: 22px 0 30px;
   max-width: 520px;
+  line-height: 1.6;
 }
 
 .hero-cta {
@@ -488,6 +510,7 @@ section {
 .hero-card h4 {
   font-family: var(--serif);
   font-size: 16px;
+  font-weight: 600;
   color: var(--brown);
   margin-bottom: 3px;
 }
@@ -574,6 +597,7 @@ section {
   font-size: 14px;
   color: var(--brown-700);
   flex: 1;
+  line-height: 1.5;
 }
 
 .card-foot {
@@ -666,6 +690,7 @@ section {
 .writer-card h4 {
   font-family: var(--serif);
   font-size: 19px;
+  font-weight: 600;
   color: var(--brown);
 }
 
@@ -687,6 +712,7 @@ section {
   display: block;
   font-family: var(--serif);
   font-size: 18px;
+  font-weight: 600;
   color: var(--brown);
 }
 
@@ -763,6 +789,7 @@ section {
   font-weight: 600;
   color: var(--brown);
   letter-spacing: -.02em;
+  line-height: 1.1;
 }
 
 .pagehead p {
@@ -770,6 +797,7 @@ section {
   color: var(--brown-700);
   margin-top: 12px;
   max-width: 640px;
+  line-height: 1.6;
 }
 
 .feature-big {
@@ -800,6 +828,7 @@ section {
 .feature-big h2 {
   font-family: var(--serif);
   font-size: clamp(26px, 3vw, 38px);
+  font-weight: 600;
   color: var(--brown);
   line-height: 1.1;
   margin: 14px 0;
@@ -808,6 +837,7 @@ section {
 .feature-big p {
   color: var(--brown-700);
   font-size: 16px;
+  line-height: 1.6;
   margin-bottom: 20px;
 }
 
@@ -828,6 +858,7 @@ section {
 .svc-cat-head h3 {
   font-family: var(--serif);
   font-size: 26px;
+  font-weight: 600;
   color: var(--brown);
 }
 
@@ -873,12 +904,14 @@ section {
 .svc h4 {
   font-family: var(--serif);
   font-size: 19px;
+  font-weight: 600;
   color: var(--brown);
 }
 
 .svc p {
   font-size: 13.5px;
   color: var(--brown-700);
+  line-height: 1.5;
   flex: 1;
 }
 
@@ -952,6 +985,7 @@ section {
   font-family: var(--serif);
   font-size: 24px;
   font-style: italic;
+  font-weight: 600;
   color: var(--brown);
   margin-bottom: 14px;
 }
@@ -1010,6 +1044,7 @@ section {
 .comic h3 {
   font-family: var(--serif);
   font-size: 21px;
+  font-weight: 600;
   color: var(--brown);
 }
 
@@ -1025,6 +1060,7 @@ section {
 .panel h3 {
   font-family: var(--serif);
   font-size: 22px;
+  font-weight: 600;
   color: var(--brown);
   margin-bottom: 16px;
 }

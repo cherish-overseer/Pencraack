@@ -13,12 +13,14 @@ import ToastContainer from "@/components/ToastContainer";
 
 const inter = Inter({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-inter",
   display: "swap",
 });
 
 const fraunces = Fraunces({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "900"],
   variable: "--font-fraunces",
   display: "swap",
 });
