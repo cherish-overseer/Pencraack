@@ -1,49 +1,70 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import NumberedServices from "@/components/NumberedServices";
-import CreativeCommercial from "@/components/CreativeCommercial";
-import AcademicResearch from "@/components/AcademicResearch";
-import HelixProcess from "@/components/HelixProcess";
-import CtaBanner from "@/components/CtaBanner";
-import HelixMarquee from "@/components/HelixMarquee";
-import Link from "next/link";
-import { Sparkles, ArrowRight } from "lucide-react";
+"use client";
 
-export const metadata = {
-  title: "Editorial & Writing Services | Pen Crack Studio",
-  description: "Explore Pen Crack's comprehensive services in academic research, creative writing, ghostwriting, and commercial copy.",
-};
+import { usePencrack } from "@/context/PencrackContext";
+import { SERVICES_CREATIVE, SERVICES_ACADEMIC } from "@/data/pencrackData";
+import { ServiceCard } from "@/components/ContentCards";
 
 export default function ServicesPage() {
+  const { openServiceRequest } = usePencrack();
+
   return (
-    <main className="min-h-screen flex flex-col bg-background text-foreground overflow-x-hidden">
-      <Header />
-      <div className="flex-1 space-y-12 py-12">
-        {/* Services Page Header */}
-        <section className="w-full px-8 max-w-7xl mx-auto text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-600/10 border border-brand-600/20 text-brand-600 text-xs font-semibold uppercase tracking-widest">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Our Editorial Offerings</span>
+    <div className="w-full">
+      <div className="pagehead">
+        <div className="wrap">
+          <div className="eyebrow">No account needed</div>
+          <h1>Professional writing services for every need.</h1>
+          <p>
+            From creative writing to technical and academic content, get quality writing support from skilled writers. Browse and request any service — no login required.
+          </p>
+          <div className="mt-5 flex gap-3 flex-wrap">
+            <span className="pill">✔ Browse freely</span>
+            <span className="pill">✔ Request without signing up</span>
+            <span className="pill">✔ Vetted writers</span>
+          </div>
+        </div>
+      </div>
+
+      <section className="sec-pad bg-[var(--cream)]">
+        <div className="wrap">
+          {/* Creative & Commercial */}
+          <div className="svc-cat-head">
+            <span className="bar" />
+            <h3>Creative &amp; Commercial</h3>
+          </div>
+          <div className="svc-grid">
+            {SERVICES_CREATIVE.map((service) => (
+              <ServiceCard key={service.name} service={service} />
+            ))}
           </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-brand-600 font-heading leading-tight">
-            We Write. We Read. We Connect.
-          </h1>
+          {/* Academic & Research */}
+          <div className="svc-cat-head mt-14">
+            <span className="bar" />
+            <h3>Academic &amp; Research</h3>
+          </div>
+          <div className="svc-grid">
+            {SERVICES_ACADEMIC.map((service) => (
+              <ServiceCard key={service.name} service={service} />
+            ))}
+          </div>
 
-          <p className="text-black text-lg sm:text-xl font-serif max-w-3xl mx-auto leading-relaxed">
-            From academic dissertations to fiction ghostwriting and corporate brand copy, our master editors and researchers craft every word with precision and passion.
-          </p>
-        </section>
-
-        {/* Featured Service Sections */}
-        <NumberedServices />
-        <CreativeCommercial />
-        <AcademicResearch />
-        <HelixProcess />
-        <CtaBanner />
-        <HelixMarquee />
-      </div>
-      <Footer />
-    </main>
+          {/* Custom Project Callout */}
+          <div className="panel mt-12 text-center bg-[var(--brown)] text-white border-none p-10">
+            <h3 className="text-white text-2xl font-serif">
+              Can’t find exactly what you need?
+            </h3>
+            <p className="text-[#e6d3bf] my-3 max-w-lg mx-auto">
+              Tell us about your project and our editorial directors will match you with the right specialist.
+            </p>
+            <button
+              className="btn bg-white text-[var(--brown)] hover:bg-[var(--beige)] mt-2 font-bold"
+              onClick={() => openServiceRequest("Custom Writing Project")}
+            >
+              Request a Custom Service
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

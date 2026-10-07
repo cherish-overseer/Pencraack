@@ -1,20 +1,32 @@
 import type { Metadata } from "next";
-import { EB_Garamond, Fraunces } from "next/font/google";
+import { Inter, Fraunces } from "next/font/google";
 import "./globals.css";
+import { PencrackProvider } from "@/context/PencrackContext";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import MobileNav from "@/components/MobileNav";
+import GiftModal from "@/components/GiftModal";
+import ServiceRequestModal from "@/components/ServiceRequestModal";
+import AuthModal from "@/components/AuthModal";
+import ReaderModal from "@/components/ReaderModal";
+import ToastContainer from "@/components/ToastContainer";
 
-const ebGaramond = EB_Garamond({
-  variable: "--font-eb-garamond",
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
 const fraunces = Fraunces({
-  variable: "--font-fraunces",
   subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Pen Crack | Editorial Services",
-  description: "Mastering the art of the written word. High-fidelity writing services tailored for academic precision and commercial impact.",
+  title: "PENCRACK — Read. Write. Share. Support.",
+  description:
+    "A home for writers and readers to share stories, poems, blogs, comics, and ideas while connecting with a community that values great writing.",
 };
 
 export default function RootLayout({
@@ -23,8 +35,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${ebGaramond.variable} ${fraunces.variable} antialiased`}>
-      <body className="min-h-screen flex flex-col font-sans">{children}</body>
+    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
+      <body className="min-h-screen flex flex-col bg-[var(--cream)] text-[var(--ink)] antialiased">
+        <PencrackProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <MobileNav />
+
+          {/* Global Modals & Notifications */}
+          <GiftModal />
+          <ServiceRequestModal />
+          <AuthModal />
+          <ReaderModal />
+          <ToastContainer />
+        </PencrackProvider>
+      </body>
     </html>
   );
 }

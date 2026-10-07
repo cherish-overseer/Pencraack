@@ -1,316 +1,218 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowRight, Sparkles } from "lucide-react";
-import QuoteModal from "./QuoteModal";
+import { usePencrack } from "@/context/PencrackContext";
 
 export default function Header() {
-  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const {
+    isDrawerOpen,
+    toggleDrawer,
+    closeDrawer,
+    isLoggedIn,
+    openAuth,
+    logout,
+    showToast,
+  } = usePencrack();
 
-  // Close mobile menu whenever the route changes
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [pathname]);
-
-  // Prevent background scroll when mobile menu is open
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isMobileMenuOpen]);
-
-  const navLinkClasses =
-    "hover:text-brand-600 transition-colors pb-1 border-b-2 border-transparent hover:border-brand-600/30 whitespace-nowrap shrink-0";
-
-  const mobileNavLinkClasses = (href: string) =>
-    `flex items-center justify-between py-3 px-4 rounded-xl text-base font-heading font-medium transition-all ${
-      pathname === href
-        ? "bg-brand-600/10 text-brand-600 font-bold border border-brand-600/20"
-        : "text-foreground hover:bg-surface hover:text-brand-600"
-    }`;
+  const navLinks = [
+    { name: "Home", href: "/" },
+    { name: "Blog", href: "/blog" },
+    { name: "Stories", href: "/stories" },
+    { name: "Poetry", href: "/poems" },
+    { name: "Comics", href: "/comics" },
+    { name: "Services", href: "/services" },
+    { name: "About", href: "/about" },
+  ];
 
   return (
     <>
-      <header className="w-full flex items-center justify-between px-6 sm:px-8 py-5 max-w-7xl mx-auto relative z-40">
-        {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-3 shrink-0">
-          <Image
-            src="/logo.png"
-            alt="Pen Crack Logo"
-            width={32}
-            height={32}
-            className="w-8 h-8 object-contain"
-          />
-          <span className="font-bold text-lg tracking-[0.15em] whitespace-nowrap font-heading">
-            PEN CRACK
-          </span>
-        </Link>
-
-        {/* Desktop Navigation (hidden on mobile) */}
-        <nav className="hidden md:flex items-center gap-5 lg:gap-7 text-sm font-medium text-foreground whitespace-nowrap flex-nowrap shrink-0">
-          <Link href="/" className={navLinkClasses}>
-            Home
+      <header className="nav">
+        <div className="wrap nav-in">
+          <Link href="/" className="logo">
+            <span className="nib">✎</span>PENCRACK
           </Link>
 
-          <div className="relative group inline-flex items-center shrink-0">
-            <Link href="/services" className={navLinkClasses}>
-              Services
-            </Link>
-            <div className="absolute top-full left-0 mt-4 w-[480px] bg-white border border-slate-200 shadow-xl rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 p-6 flex gap-6">
-              <div className="flex-1">
-                <h4 className="font-semibold text-brand-600 mb-3 text-xs uppercase tracking-wider">
-                  Creative & Commercial
-                </h4>
-                <ul className="space-y-2 text-sm text-muted font-serif">
-                  <li>
-                    <Link
-                      href="/services"
-                      className="hover:text-brand-600 transition-colors"
-                    >
-                      Copywriting
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/services"
-                      className="hover:text-brand-600 transition-colors"
-                    >
-                      Editing
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/services"
-                      className="hover:text-brand-600 transition-colors"
-                    >
-                      Poetry
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/services"
-                      className="hover:text-brand-600 transition-colors"
-                    >
-                      Technical Writing
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/services"
-                      className="hover:text-brand-600 transition-colors"
-                    >
-                      Grant Writing
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/services"
-                      className="hover:text-brand-600 transition-colors"
-                    >
-                      Scriptwriting
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/services"
-                      className="hover:text-brand-600 transition-colors"
-                    >
-                      Newsletter
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/services"
-                      className="hover:text-brand-600 transition-colors"
-                    >
-                      Proofreading
-                    </Link>
-                  </li>
-                </ul>
+          <nav className="nav-links">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={pathname === link.href ? "active" : ""}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="nav-right">
+            <button
+              className="icon-btn"
+              onClick={() => showToast("Search coming up in next update!")}
+              title="Search"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="7" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+            </button>
+
+            {!isLoggedIn ? (
+              <div className="flex items-center gap-2.5">
+                <button
+                  type="button"
+                  className="btn btn-ghost btn-sm hidden sm:inline-flex"
+                  onClick={() => openAuth("login")}
+                >
+                  Login
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-primary btn-sm"
+                  onClick={() => openAuth("signup")}
+                >
+                  Sign Up
+                </button>
               </div>
-              <div className="flex-1">
-                <h4 className="font-semibold text-brand-600 mb-3 text-xs uppercase tracking-wider">
-                  Academic & Research
-                </h4>
-                <ul className="space-y-2 text-sm text-muted font-serif">
-                  <li>
-                    <Link
-                      href="/services"
-                      className="hover:text-brand-600 transition-colors"
-                    >
-                      Thesis Support
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/services"
-                      className="hover:text-brand-600 transition-colors"
-                    >
-                      White Papers
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/services"
-                      className="hover:text-brand-600 transition-colors"
-                    >
-                      UX Writing
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/services"
-                      className="hover:text-brand-600 transition-colors"
-                    >
-                      Content Strategy
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/services"
-                      className="hover:text-brand-600 transition-colors"
-                    >
-                      Transcreation
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/services"
-                      className="hover:text-brand-600 transition-colors"
-                    >
-                      Speech Writing
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/services"
-                      className="hover:text-brand-600 transition-colors"
-                    >
-                      Resume Design
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/services"
-                      className="hover:text-brand-600 transition-colors"
-                    >
-                      Press Releases
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <Link href="/about" className={navLinkClasses}>
-            About
-          </Link>
-          <Link href="/blog" className={navLinkClasses}>
-            Blog
-          </Link>
-          <Link href="/poems" className={navLinkClasses}>
-            Poems
-          </Link>
-          <Link href="/comics" className={navLinkClasses}>
-            Comics
-          </Link>
-          <Link href="/contact" className={navLinkClasses}>
-            Contact
-          </Link>
-        </nav>
-
-        {/* Right Desktop CTA & Mobile Hamburger Trigger */}
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => setIsQuoteOpen(true)}
-            className="hidden sm:inline-flex bg-brand-700 hover:bg-brand-800 text-white px-5 py-2.5 text-sm font-medium transition-all shadow-sm hover:shadow-md active:scale-95 whitespace-nowrap shrink-0 font-heading cursor-pointer rounded-lg"
-          >
-            Get a Quote
-          </button>
-
-          {/* Mobile Hamburger Toggle Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2.5 rounded-xl bg-surface border border-border text-foreground hover:text-brand-600 hover:border-brand-600/40 transition-colors"
-            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={isMobileMenuOpen}
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6 text-brand-600" />
             ) : (
-              <Menu className="w-6 h-6" />
+              <div className="flex items-center gap-2">
+                <button
+                  className="icon-btn hidden sm:grid"
+                  onClick={() => showToast("Saved Library")}
+                  title="My Library"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                  </svg>
+                </button>
+                <button
+                  className="icon-btn"
+                  onClick={() => showToast("No new notifications")}
+                  title="Notifications"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+                    <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+                  </svg>
+                  <span className="dot" />
+                </button>
+                <button
+                  className="btn btn-primary btn-sm hidden sm:inline-flex"
+                  onClick={() => showToast("Author Publishing Studio")}
+                >
+                  + Create
+                </button>
+                <img
+                  className="avatar"
+                  src="https://i.pravatar.cc/120?img=47"
+                  alt="Avatar"
+                  onClick={() => showToast("Author Dashboard")}
+                  title="Dashboard"
+                />
+              </div>
             )}
-          </button>
+
+            <button
+              className="icon-btn hamburger"
+              onClick={toggleDrawer}
+              aria-label="Toggle menu"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M3 6h18M3 12h18M3 18h18" />
+              </svg>
+            </button>
+          </div>
         </div>
       </header>
 
-      {/* Mobile Navigation Drawer Overlay */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 top-[73px] z-50 bg-black/60 backdrop-blur-sm animate-fade-in">
-          <div className="bg-background border-b border-border shadow-2xl p-6 space-y-6 max-h-[calc(100vh-73px)] overflow-y-auto">
-            <div className="space-y-1">
-              <Link href="/" className={mobileNavLinkClasses("/")}>
-                <span>Home</span>
-                <ArrowRight className="w-4 h-4 opacity-50" />
-              </Link>
-              <Link href="/services" className={mobileNavLinkClasses("/services")}>
-                <span>Services</span>
-                <ArrowRight className="w-4 h-4 opacity-50" />
-              </Link>
-              <Link href="/about" className={mobileNavLinkClasses("/about")}>
-                <span>About</span>
-                <ArrowRight className="w-4 h-4 opacity-50" />
-              </Link>
-              <Link href="/blog" className={mobileNavLinkClasses("/blog")}>
-                <span>Blog</span>
-                <ArrowRight className="w-4 h-4 opacity-50" />
-              </Link>
-              <Link href="/poems" className={mobileNavLinkClasses("/poems")}>
-                <span>Poems</span>
-                <ArrowRight className="w-4 h-4 opacity-50" />
-              </Link>
-              <Link href="/comics" className={mobileNavLinkClasses("/comics")}>
-                <span>Comics</span>
-                <ArrowRight className="w-4 h-4 opacity-50" />
-              </Link>
-              <Link href="/contact" className={mobileNavLinkClasses("/contact")}>
-                <span>Contact</span>
-                <ArrowRight className="w-4 h-4 opacity-50" />
-              </Link>
-            </div>
+      {/* Mobile Drawer */}
+      <div
+        className={`drawer ${isDrawerOpen ? "open" : ""}`}
+        onClick={(e) => e.target === e.currentTarget && closeDrawer()}
+      >
+        <div className="drawer-panel">
+          <div className="flex justify-between items-center mb-4">
+            <span className="logo text-xl">
+              <span className="nib">✎</span>PENCRACK
+            </span>
+            <button className="icon-btn" onClick={closeDrawer}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 6 6 18M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
 
-            {/* Mobile Quote CTA Button */}
-            <div className="pt-2 border-t border-border">
-              <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  setIsQuoteOpen(true);
-                }}
-                className="w-full flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white py-3.5 rounded-xl font-heading font-bold text-sm tracking-wide shadow-md active:scale-98 transition-all"
+          <div className="space-y-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={closeDrawer}
+                className={pathname === link.href ? "bg-[var(--beige)] font-bold" : ""}
               >
-                <Sparkles className="w-4 h-4" />
-                <span>Get a Quote / Showcase</span>
+                {link.name}
+              </Link>
+            ))}
+          </div>
+
+          <div className="h-[1px] bg-[var(--line)] my-4" />
+
+          {!isLoggedIn ? (
+            <div className="flex flex-col gap-2.5">
+              <button
+                className="btn btn-ghost btn-block"
+                onClick={() => {
+                  closeDrawer();
+                  openAuth("login");
+                }}
+              >
+                Login
+              </button>
+              <button
+                className="btn btn-primary btn-block"
+                onClick={() => {
+                  closeDrawer();
+                  openAuth("signup");
+                }}
+              >
+                Sign Up
               </button>
             </div>
-          </div>
+          ) : (
+            <div className="flex flex-col gap-1.5">
+              <button
+                className="text-left py-3 px-3 font-semibold text-[var(--brown)] hover:bg-[var(--beige)] rounded-xl"
+                onClick={() => {
+                  closeDrawer();
+                  showToast("Author Studio");
+                }}
+              >
+                Create / Upload
+              </button>
+              <button
+                className="text-left py-3 px-3 font-semibold text-[var(--brown)] hover:bg-[var(--beige)] rounded-xl"
+                onClick={() => {
+                  closeDrawer();
+                  showToast("My Library");
+                }}
+              >
+                My Library
+              </button>
+              <button
+                className="text-left py-3 px-3 font-semibold text-rose-700 hover:bg-[var(--beige)] rounded-xl"
+                onClick={() => {
+                  closeDrawer();
+                  logout();
+                }}
+              >
+                Log out
+              </button>
+            </div>
+          )}
         </div>
-      )}
-
-      {/* Quote Modal */}
-      <QuoteModal
-        isOpen={isQuoteOpen}
-        onClose={() => setIsQuoteOpen(false)}
-      />
+      </div>
     </>
   );
 }
