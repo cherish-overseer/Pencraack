@@ -1211,3 +1211,313 @@ section {
   .sec-pad { padding: 50px 0; }
   .foot-grid { grid-template-columns: 1fr; }
 }
+
+/* ==========================================================================
+   PENCRACK DEVELOPER API PORTAL STYLING (Stripe / Mintlify Level Quality)
+   ========================================================================== */
+
+.apidocs-subbar {
+  position: sticky;
+  top: 74px;
+  z-index: 100;
+  background: rgba(250, 245, 238, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  padding: 12px 0;
+}
+
+.apidocs-subbar-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.apidocs-layout {
+  display: grid;
+  grid-template-columns: 290px minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+  padding: 28px 0 80px;
+}
+
+.apidocs-sidebar {
+  position: sticky;
+  top: 145px;
+  max-height: calc(100vh - 165px);
+  overflow-y: auto;
+  padding-right: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.apidocs-sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+.apidocs-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.apidocs-sidebar::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 999px;
+}
+
+.apidocs-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.apidocs-search input {
+  width: 100%;
+  padding: 10px 14px 10px 36px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  font-size: 13.5px;
+  color: var(--ink);
+  outline: none;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+
+.apidocs-search input:focus {
+  border-color: var(--brown);
+  box-shadow: 0 0 0 3px rgba(91, 58, 41, 0.12);
+}
+
+.apidocs-search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--muted);
+  pointer-events: none;
+  font-size: 13px;
+}
+
+.apidocs-cat-title {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.apidocs-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--brown-700);
+  transition: all 0.15s ease;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  border: 1px solid transparent;
+}
+
+.apidocs-nav-link:hover {
+  background: var(--beige);
+  color: var(--brown);
+}
+
+.apidocs-nav-link.active {
+  background: var(--brown);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+.apidocs-method {
+  font-family: monospace;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 5px;
+  letter-spacing: 0.04em;
+  display: inline-block;
+}
+
+.apidocs-method-get {
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+.apidocs-method-post {
+  background: #eff6ff;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+}
+.apidocs-method-patch {
+  background: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+.apidocs-method-delete {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+/* Master Playground Grid */
+.apidocs-playground-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.apidocs-card {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.apidocs-console-card {
+  background: #181410;
+  border: 1px solid #362920;
+  border-radius: var(--r);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  color: #e5dacd;
+  position: sticky;
+  top: 145px;
+}
+
+.apidocs-console-header {
+  background: #231c16;
+  border-bottom: 1px solid #362920;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.apidocs-code-block {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  padding: 16px;
+  overflow-x: auto;
+  color: #e8ded2;
+  background: #130f0c;
+  border-radius: 8px;
+  border: 1px solid #281e18;
+}
+
+.apidocs-tag-pill {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--beige);
+  color: var(--brown-700);
+  border: 1px solid var(--line);
+}
+
+/* Responsive Overrides */
+@media(max-width: 1024px) {
+  .apidocs-layout {
+    grid-template-columns: 1fr;
+  }
+  .apidocs-sidebar {
+    position: static;
+    max-height: none;
+    display: none; /* revealed via drawer or mobile tab */
+  }
+  .apidocs-sidebar.mobile-open {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 320px;
+    height: 100vh;
+    max-height: 100vh;
+    background: var(--cream);
+    z-index: 1000;
+    padding: 24px;
+    box-shadow: var(--shadow-lg);
+  }
+  .apidocs-playground-grid {
+    grid-template-columns: 1fr;
+  }
+  .apidocs-console-card {
+    position: static;
+  }
+}
+
+@media(max-width: 640px) {
+  .apidocs-subbar {
+    top: 64px;
+  }
+  .apidocs-subbar-in {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* ==========================================================================
+   LUXURY FORM & AUTOFILL STYLING
+   ========================================================================== */
+
+/* Eliminate ugly browser autofill blue/yellow background */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+  -webkit-text-fill-color: var(--ink) !important;
+  caret-color: var(--ink);
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.modal-input {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  background: #ffffff;
+  border: 1.5px solid #e7dbcd;
+  border-radius: 14px;
+  font-size: 14.5px;
+  color: var(--ink);
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 2px rgba(91, 58, 41, 0.04);
+}
+
+.modal-input:hover {
+  border-color: #d1bfa9;
+}
+
+.modal-input:focus {
+  border-color: var(--brown);
+  box-shadow: 0 0 0 3.5px rgba(91, 58, 41, 0.12);
+  background: #ffffff;
+}
+
+.modal-label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--brown-700);
+  margin-bottom: 6px;
+  letter-spacing: 0.01em;
+}
+
+

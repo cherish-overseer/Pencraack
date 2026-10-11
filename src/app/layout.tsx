@@ -37,7 +37,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      data-scroll-behavior="smooth"
+      className={`${inter.variable} ${fraunces.variable}`}
+    >
       <body className="min-h-screen flex flex-col bg-[var(--cream)] text-[var(--ink)] antialiased">
         <PencrackProvider>
           <Header />

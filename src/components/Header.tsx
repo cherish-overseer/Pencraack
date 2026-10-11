@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { usePencrack } from "@/context/PencrackContext";
@@ -11,10 +12,13 @@ export default function Header() {
     toggleDrawer,
     closeDrawer,
     isLoggedIn,
+    user,
     openAuth,
     logout,
     showToast,
   } = usePencrack();
+
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -24,7 +28,13 @@ export default function Header() {
     { name: "Comics", href: "/comics" },
     { name: "Services", href: "/services" },
     { name: "About", href: "/about" },
+    { name: "API Docs", href: "/api-docs" },
   ];
+
+  const userAvatar =
+    user?.avatarUrl || "https://i.pravatar.cc/120?img=32";
+  const displayName =
+    user?.fullName || user?.username || "Pencrack Member";
 
   return (
     <>
@@ -47,75 +57,116 @@ export default function Header() {
           </nav>
 
           <div className="nav-right">
-            <button
-              className="icon-btn"
-              onClick={() => showToast("Search coming up in next update!")}
-              title="Search"
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="11" cy="11" r="7" />
-                <path d="m21 21-4.3-4.3" />
-              </svg>
-            </button>
-
             {!isLoggedIn ? (
               <div className="flex items-center gap-2.5">
                 <button
                   type="button"
-                  className="btn btn-ghost btn-sm hidden sm:inline-flex"
+                  className="btn btn-ghost btn-sm hidden sm:inline-flex cursor-pointer"
                   onClick={() => openAuth("login")}
                 >
                   Login
                 </button>
                 <button
                   type="button"
-                  className="btn btn-primary btn-sm"
+                  className="btn btn-primary btn-sm cursor-pointer"
                   onClick={() => openAuth("signup")}
                 >
                   Sign Up
                 </button>
               </div>
             ) : (
-              <div className="flex items-center gap-2">
-                <button
-                  className="icon-btn hidden sm:grid"
-                  onClick={() => showToast("Saved Library")}
-                  title="My Library"
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-                  </svg>
-                </button>
-                <button
-                  className="icon-btn"
-                  onClick={() => showToast("No new notifications")}
-                  title="Notifications"
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-                    <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-                  </svg>
-                  <span className="dot" />
-                </button>
-                <button
-                  className="btn btn-primary btn-sm hidden sm:inline-flex"
-                  onClick={() => showToast("Author Publishing Studio")}
-                >
-                  + Create
-                </button>
-                <img
-                  className="avatar"
-                  src="https://i.pravatar.cc/120?img=47"
-                  alt="Avatar"
-                  onClick={() => showToast("Author Dashboard")}
-                  title="Dashboard"
-                />
+              <div className="flex items-center gap-2.5 relative">
+                {user?.wallet && (
+                  <div
+                    className="hidden md:flex items-center gap-1.5 px-3 py-1 bg-[var(--beige)] border border-[var(--line)] rounded-full text-xs font-bold text-[var(--brown)] cursor-pointer"
+                    title="Ledger Balance"
+                    onClick={() =>
+                      showToast(`Wallet Balance: ₦${Number(user.wallet?.availableBalance || 0).toLocaleString()}`, "info")
+                    }
+                  >
+                    <span>💳</span>
+                    <span>₦{Number(user.wallet?.availableBalance || 0).toLocaleString()}</span>
+                  </div>
+                )}
+
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                    className="flex items-center gap-2 cursor-pointer focus:outline-none"
+                  >
+                    <img
+                      className="avatar border border-[var(--line)] hover:ring-2 hover:ring-[var(--brown)] transition-all"
+                      src={userAvatar}
+                      alt={displayName}
+                    />
+                    <span className="hidden lg:inline text-xs font-bold text-[var(--brown)] max-w-[110px] truncate">
+                      {displayName}
+                    </span>
+                  </button>
+
+                  {/* Desktop Dropdown */}
+                  {isUserMenuOpen && (
+                    <div
+                      className="absolute right-0 mt-2 w-56 bg-white border border-[var(--line)] rounded-2xl shadow-[var(--shadow-lg)] py-2 z-50 animate-fade-in"
+                      onMouseLeave={() => setIsUserMenuOpen(false)}
+                    >
+                      <div className="px-4 py-2 border-b border-[var(--line)]">
+                        <p className="text-xs font-bold text-[var(--brown)] truncate">{displayName}</p>
+                        <p className="text-[11px] text-[var(--muted)] truncate">{user?.email}</p>
+                        {user?.roles && (
+                          <div className="flex gap-1 mt-1">
+                            {user.roles.map((r) => (
+                              <span
+                                key={r}
+                                className="px-1.5 py-0.5 bg-[var(--beige)] text-[var(--brown-700)] rounded text-[9px] font-bold uppercase tracking-wider"
+                              >
+                                {r}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+
+                      <Link
+                        href="/api-docs"
+                        onClick={() => setIsUserMenuOpen(false)}
+                        className="flex items-center gap-2 px-4 py-2.5 text-xs text-[var(--ink)] hover:bg-[var(--beige)] font-medium"
+                      >
+                        <span>📖</span> Interactive API Docs
+                      </Link>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsUserMenuOpen(false);
+                          showToast("Library synced");
+                        }}
+                        className="w-full text-left flex items-center gap-2 px-4 py-2 text-xs text-[var(--ink)] hover:bg-[var(--beige)] font-medium cursor-pointer"
+                      >
+                        <span>📚</span> My Reading Library
+                      </button>
+
+                      <div className="h-[1px] bg-[var(--line)] my-1" />
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsUserMenuOpen(false);
+                          logout();
+                        }}
+                        className="w-full text-left flex items-center gap-2 px-4 py-2 text-xs text-rose-600 hover:bg-rose-50 font-bold cursor-pointer"
+                      >
+                        <span>🚪</span> Log out
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
 
             <button
-              className="icon-btn hamburger"
+              className="icon-btn hamburger cursor-pointer"
               onClick={toggleDrawer}
               aria-label="Toggle menu"
             >
@@ -137,7 +188,7 @@ export default function Header() {
             <span className="logo text-xl">
               <span className="nib">✎</span>PENCRACK
             </span>
-            <button className="icon-btn" onClick={closeDrawer}>
+            <button className="icon-btn cursor-pointer" onClick={closeDrawer}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M18 6 6 18M6 6l12 12" />
               </svg>
@@ -162,7 +213,7 @@ export default function Header() {
           {!isLoggedIn ? (
             <div className="flex flex-col gap-2.5">
               <button
-                className="btn btn-ghost btn-block"
+                className="btn btn-ghost btn-block cursor-pointer"
                 onClick={() => {
                   closeDrawer();
                   openAuth("login");
@@ -171,7 +222,7 @@ export default function Header() {
                 Login
               </button>
               <button
-                className="btn btn-primary btn-block"
+                className="btn btn-primary btn-block cursor-pointer"
                 onClick={() => {
                   closeDrawer();
                   openAuth("signup");
@@ -182,17 +233,17 @@ export default function Header() {
             </div>
           ) : (
             <div className="flex flex-col gap-1.5">
+              <div className="p-3 bg-[var(--beige)] rounded-xl mb-2">
+                <p className="font-bold text-xs text-[var(--brown)]">{displayName}</p>
+                <p className="text-[11px] text-[var(--muted)]">{user?.email}</p>
+                {user?.wallet && (
+                  <p className="text-xs font-bold text-emerald-700 mt-1">
+                    Wallet: ₦{Number(user.wallet?.availableBalance || 0).toLocaleString()}
+                  </p>
+                )}
+              </div>
               <button
-                className="text-left py-3 px-3 font-semibold text-[var(--brown)] hover:bg-[var(--beige)] rounded-xl"
-                onClick={() => {
-                  closeDrawer();
-                  showToast("Author Studio");
-                }}
-              >
-                Create / Upload
-              </button>
-              <button
-                className="text-left py-3 px-3 font-semibold text-[var(--brown)] hover:bg-[var(--beige)] rounded-xl"
+                className="text-left py-2.5 px-3 font-semibold text-[var(--brown)] hover:bg-[var(--beige)] rounded-xl cursor-pointer"
                 onClick={() => {
                   closeDrawer();
                   showToast("My Library");
@@ -201,7 +252,7 @@ export default function Header() {
                 My Library
               </button>
               <button
-                className="text-left py-3 px-3 font-semibold text-rose-700 hover:bg-[var(--beige)] rounded-xl"
+                className="text-left py-2.5 px-3 font-semibold text-rose-700 hover:bg-rose-50 rounded-xl cursor-pointer"
                 onClick={() => {
                   closeDrawer();
                   logout();

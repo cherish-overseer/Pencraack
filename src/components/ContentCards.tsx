@@ -16,7 +16,7 @@ export function ContentCard({ data, type }: ContentCardProps) {
   return (
     <div
       onClick={() => openReader(data, type)}
-      className="card group"
+      className="card group cursor-pointer"
     >
       <img
         className="cover"
@@ -50,7 +50,7 @@ export function ContentCard({ data, type }: ContentCardProps) {
         <div className="card-actions">
           <button
             type="button"
-            className="btn btn-soft btn-sm flex-1"
+            className="btn btn-soft btn-sm flex-1 cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
               openReader(data, type);
@@ -60,10 +60,10 @@ export function ContentCard({ data, type }: ContentCardProps) {
           </button>
           <button
             type="button"
-            className="btn btn-gift btn-sm"
+            className="btn btn-gift btn-sm cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
-              openGift(writer.n, writer.img);
+              openGift(writer.n, writer.img, String(writer.id));
             }}
           >
             🎁 Gift
@@ -81,7 +81,7 @@ export function PoemCard({ poem }: { poem: Poem }) {
   return (
     <div
       onClick={() => openReader(poem, "Poem")}
-      className="poem group"
+      className="poem group cursor-pointer"
     >
       <h3 className="group-hover:text-[var(--brown-700)] transition-colors">
         {poem.t}
@@ -96,13 +96,13 @@ export function PoemCard({ poem }: { poem: Poem }) {
           <span>❤️ {poem.likes}</span>
           <button
             type="button"
-            className="btn btn-gift btn-sm"
+            className="btn btn-gift btn-sm cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
-              openGift(writer.n, writer.img);
+              openGift(writer.n, writer.img, String(writer.id));
             }}
           >
-            🎁
+            🎁 Gift
           </button>
         </div>
       </div>
@@ -113,35 +113,37 @@ export function PoemCard({ poem }: { poem: Poem }) {
 export function ComicCard({ comic }: { comic: Comic }) {
   const { openReader, openGift } = usePencrack();
   const writer = WRITERS[comic.w] || WRITERS[0];
-  const cover = getImgUrl(comic.i, 400);
+  const cover = getImgUrl(comic.i, 800);
 
   return (
     <div
       onClick={() => openReader(comic, "Comic")}
-      className="comic group"
+      className="comic-card group cursor-pointer"
     >
-      <img src={cover} alt={comic.t} loading="lazy" />
-      <div className="cbody">
-        <span className="tag">{comic.c}</span>
-        <h3 className="group-hover:text-[var(--brown-700)] transition-colors">
+      <div className="comic-cover-wrap">
+        <img
+          src={cover}
+          alt={comic.t}
+          loading="lazy"
+        />
+        <span className="comic-badge">{comic.c}</span>
+      </div>
+      <div className="comic-meta">
+        <h3 className="group-hover:text-[var(--brown-700)] transition-colors line-clamp-1">
           {comic.t}
         </h3>
-        <p className="muted text-sm flex-1 line-clamp-2">{comic.e}</p>
-        <div className="meta">
-          <span>👁️ {comic.reads}</span>
-          <span>❤️ {comic.likes}</span>
-        </div>
-        <div className="flex items-center gap-2 mt-1.5">
+        <p className="line-clamp-2">{comic.e}</p>
+        <div className="flex items-center justify-between pt-2 border-t border-[var(--line)]">
           <div className="who">
             <img src={writer.img} alt={writer.n} />
             <div className="wn">{writer.n}</div>
           </div>
           <button
             type="button"
-            className="btn btn-gift btn-sm ml-auto"
+            className="btn btn-gift btn-sm cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
-              openGift(writer.n, writer.img);
+              openGift(writer.n, writer.img, String(writer.id));
             }}
           >
             🎁 Gift
@@ -180,8 +182,8 @@ export function WriterCard({ writer, supported }: { writer: Writer; supported?: 
       )}
       <button
         type="button"
-        className="btn btn-gift btn-sm btn-block"
-        onClick={() => openGift(writer.n, writer.img)}
+        className="btn btn-gift btn-sm btn-block cursor-pointer"
+        onClick={() => openGift(writer.n, writer.img, String(writer.id))}
       >
         Support
       </button>
@@ -195,7 +197,7 @@ export function ServiceCard({ service }: { service: ServiceItem }) {
   return (
     <div
       onClick={() => openServiceRequest(service.name)}
-      className="svc group"
+      className="svc group cursor-pointer"
     >
       <div className="ico">
         <span className="text-xl">✍️</span>
@@ -204,9 +206,14 @@ export function ServiceCard({ service }: { service: ServiceItem }) {
         {service.name}
       </h4>
       <p>{service.desc}</p>
+      {service.price && (
+        <div className="text-xs font-bold text-[var(--accent)] mt-2">
+          From {service.price} {service.turnaround ? `· ${service.turnaround}` : ""}
+        </div>
+      )}
       <button
         type="button"
-        className="btn btn-ghost btn-sm mt-auto"
+        className="btn btn-ghost btn-sm mt-auto cursor-pointer"
         onClick={(e) => {
           e.stopPropagation();
           openServiceRequest(service.name);
