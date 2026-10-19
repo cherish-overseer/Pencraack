@@ -7,18 +7,16 @@ import {
   BLOGS,
   POEMS,
   COMICS,
-  WRITERS,
   getImgUrl,
 } from "@/data/pencrackData";
 import {
   ContentCard,
   PoemCard,
   ComicCard,
-  WriterCard,
 } from "@/components/ContentCards";
 
 export default function HomePage() {
-  const { openAuth, openGift, showToast } = usePencrack();
+  const { openAuth } = usePencrack();
 
   return (
     <div className="w-full space-y-0">
@@ -234,140 +232,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===================== NEW WRITERS ===================== */}
-      <section className="sec-pad bg-white">
-        <div className="wrap">
-          <div className="sec-head">
-            <div>
-              <div className="tag">Fresh voices</div>
-              <h2>New Writers</h2>
-            </div>
-            <button
-              onClick={() => showToast("Explore all authors")}
-              className="link-all"
-            >
-              View All →
-            </button>
-          </div>
-          <div className="grid g4">
-            {WRITERS.slice(0, 4).map((writer) => (
-              <WriterCard key={writer.id} writer={writer} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===================== MOST SUPPORTED WRITERS ===================== */}
-      <section className="sec-pad bg-[var(--cream)]">
-        <div className="wrap">
-          <div className="sec-head">
-            <div>
-              <div className="tag">Reader favourites</div>
-              <h2>Most Supported Writers</h2>
-            </div>
-            <button
-              onClick={() => showToast("Explore top creators")}
-              className="link-all"
-            >
-              View All →
-            </button>
-          </div>
-          <div className="grid g4">
-            {WRITERS.slice(2, 6).map((writer) => (
-              <WriterCard key={writer.id} writer={writer} supported />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===================== WRITER SUPPORT FEATURE ===================== */}
-      <section className="sec-pad bg-white">
-        <div className="wrap support-wrap">
-          <div>
-            <div className="eyebrow">Writer support</div>
-            <h2 className="serif text-3xl sm:text-5xl text-[var(--brown)] font-bold leading-tight">
-              Support the writers you love.
-            </h2>
-            <p className="text-[var(--brown-700)] text-base sm:text-lg my-4 leading-relaxed">
-              When a story moves you, say thank you in a way that matters. Readers can financially support or gift writers directly — fuelling the work they can’t wait to read next.
-            </p>
-            <ul className="space-y-3 my-5 text-sm sm:text-base text-[var(--brown-700)]">
-              <li className="flex items-start gap-2.5">
-                <span className="text-[var(--accent)] font-bold">✔</span>
-                <span>100% secure payments, powered by trusted processors</span>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <span className="text-[var(--accent)] font-bold">✔</span>
-                <span>Writers keep the majority of every gift</span>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <span className="text-[var(--accent)] font-bold">✔</span>
-                <span>One-off gifts or recurring support</span>
-              </li>
-            </ul>
-            <button
-              className="btn btn-primary"
-              onClick={() => openGift(WRITERS[0].n, WRITERS[0].img)}
-            >
-              🎁 Gift a Writer
-            </button>
-          </div>
-
-          <div className="panel shadow-[var(--shadow)]">
-            <div className="bg-white border border-[var(--line)] rounded-2xl p-4 flex items-center gap-3 mb-5">
-              <img
-                src={WRITERS[0].img}
-                alt={WRITERS[0].n}
-                className="w-12 h-12 rounded-full object-cover border border-[var(--beige-2)]"
-              />
-              <div>
-                <div className="font-bold text-[var(--brown)]">{WRITERS[0].n}</div>
-                <div className="text-[var(--muted)] text-xs">Author of “The Harmattan Letters”</div>
-              </div>
-            </div>
-
-            <div className="font-semibold text-[var(--brown)] text-sm mb-2">
-              Choose an amount
-            </div>
-            <div className="gift-amts">
-              <div
-                className="gift-amt active"
-                onClick={() => openGift(WRITERS[0].n, WRITERS[0].img)}
-              >
-                ₦500
-              </div>
-              <div
-                className="gift-amt"
-                onClick={() => openGift(WRITERS[0].n, WRITERS[0].img)}
-              >
-                ₦1,000
-              </div>
-              <div
-                className="gift-amt"
-                onClick={() => openGift(WRITERS[0].n, WRITERS[0].img)}
-              >
-                ₦2,000
-              </div>
-              <div
-                className="gift-amt"
-                onClick={() => openGift(WRITERS[0].n, WRITERS[0].img)}
-              >
-                ₦5,000
-              </div>
-            </div>
-
-            <button
-              className="btn btn-gift btn-block mt-2"
-              onClick={() => openGift(WRITERS[0].n, WRITERS[0].img)}
-            >
-              Support Writer
-            </button>
-            <p className="muted center text-xs mt-3">
-              🔒 Secure · Encrypted · Demo payment
-            </p>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

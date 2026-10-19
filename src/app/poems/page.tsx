@@ -16,10 +16,10 @@ export default function PoetryPage() {
   return (
     <div className="w-full">
       <div className="pagehead text-center">
-        <div className="wrap">
-          <div className="eyebrow">Where words breathe</div>
-          <h1 className="italic">Poetry</h1>
-          <p className="max-w-xl mx-auto">
+        <div className="wrap text-center flex flex-col items-center">
+          <div className="eyebrow text-center">Where words breathe</div>
+          <h1 className="italic text-center">Poetry</h1>
+          <p className="max-w-2xl mx-auto text-center">
             A quiet, spacious place for verse — read slowly, feel deeply, and support the poets who move you.
           </p>
         </div>
