@@ -44,8 +44,8 @@ export default async function StoryReaderPage({ params }: PageProps) {
   const relatedStories = STORIES.filter((s) => s.id !== story.id).slice(0, 3);
 
   return (
-    <article className="min-h-screen bg-[var(--cream)] py-8 sm:py-14">
-      <div className="wrap max-w-4xl mx-auto">
+    <article className="min-h-screen bg-[var(--cream)] py-8 sm:py-16">
+      <div className="wrap max-w-6xl mx-auto px-4 sm:px-8">
         {/* Navigation Breadcrumb & Category */}
         <div className="flex items-center justify-between mb-8 pb-4 border-b border-[var(--line)]">
           <Link
@@ -59,8 +59,8 @@ export default async function StoryReaderPage({ params }: PageProps) {
         </div>
 
         {/* Story Header */}
-        <header className="mb-8">
-          <h1 className="font-serif text-3xl sm:text-5xl font-bold text-[var(--brown)] leading-tight tracking-tight mb-6">
+        <header className="mb-10 max-w-5xl">
+          <h1 className="font-serif text-4xl sm:text-6xl font-bold text-[var(--brown)] leading-[1.15] tracking-tight mb-6">
             {story.t}
           </h1>
 
@@ -68,11 +68,11 @@ export default async function StoryReaderPage({ params }: PageProps) {
             <img
               src={writer.img}
               alt={writer.n}
-              className="w-13 h-13 sm:w-14 sm:h-14 rounded-full object-cover border-2 border-white shadow-sm flex-shrink-0"
+              className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-white shadow-sm flex-shrink-0"
             />
             <div>
-              <div className="font-serif text-lg font-bold text-[var(--brown)]">{writer.n}</div>
-              <div className="text-xs sm:text-sm text-[var(--muted)] flex items-center gap-2 flex-wrap">
+              <div className="font-serif text-xl font-bold text-[var(--brown)]">{writer.n}</div>
+              <div className="text-xs sm:text-sm text-[var(--muted)] flex items-center gap-2.5 flex-wrap mt-0.5">
                 <span>{story.d || "Oct 2026"}</span>
                 <span>•</span>
                 <span>⏱️ {story.rt}</span>
@@ -83,49 +83,54 @@ export default async function StoryReaderPage({ params }: PageProps) {
           </div>
         </header>
 
-        {/* Cover Image */}
-        <div className="mb-10">
+        {/* Cover Image with Generous Spacing */}
+        <div className="mb-20 sm:mb-28">
           <img
             src={coverImg}
             alt={story.t}
-            className="w-full h-72 sm:h-[460px] object-cover rounded-[var(--r)] shadow-md"
+            className="w-full h-80 sm:h-[540px] object-cover rounded-[var(--r)] shadow-md"
           />
+          <div className="text-xs text-[var(--muted)] mt-4 italic font-sans text-center tracking-wide">
+            Cover Illustration · Pencrack Stories
+          </div>
         </div>
 
-        {/* Story Body Content */}
-        <div className="font-serif text-lg sm:text-xl text-[var(--ink)] leading-relaxed space-y-6 max-w-3xl mx-auto">
-          {story.body && story.body.length > 0 ? (
-            <>
-              <p className="first-letter:float-left first-letter:text-5xl first-letter:font-bold first-letter:text-[var(--brown)] first-letter:mr-3 first-letter:leading-none">
-                {story.body[0]}
-              </p>
-              {story.body.slice(1, 2).map((para, i) => (
-                <p key={i}>{para}</p>
-              ))}
+        {/* Story Body Content - Fits the Screen, Expansive & Breathable */}
+        <div className="max-w-5xl mx-auto w-full pt-4">
+          <div className="font-serif text-xl sm:text-[23px] text-[var(--ink)] leading-[2.2] sm:leading-[2.35] space-y-10 sm:space-y-12">
+            {story.body && story.body.length > 0 ? (
+              <>
+                <p className="font-serif">
+                  {story.body[0]}
+                </p>
+                {story.body.slice(1, 2).map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))}
 
-              {story.quote && (
-                <blockquote className="border-l-4 border-[var(--accent)] pl-6 py-2 my-8 italic text-[var(--brown-700)] font-serif text-xl sm:text-2xl bg-[var(--beige)]/40 rounded-r-[var(--r-sm)]">
-                  {story.quote}
-                </blockquote>
-              )}
+                {story.quote && (
+                  <blockquote className="border-l-4 border-[var(--accent)] pl-8 sm:pl-10 py-6 my-14 italic text-[var(--brown-700)] font-serif text-2xl sm:text-3xl leading-[1.8] bg-[var(--beige)]/50 rounded-r-[var(--r)] shadow-xs">
+                    {story.quote}
+                  </blockquote>
+                )}
 
-              {story.subheading && (
-                <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[var(--brown)] pt-4 pb-1">
-                  {story.subheading}
-                </h2>
-              )}
+                {story.subheading && (
+                  <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[var(--brown)] pt-10 pb-4 border-b border-[var(--line)]/60">
+                    {story.subheading}
+                  </h2>
+                )}
 
-              {story.body.slice(2).map((para, i) => (
-                <p key={i}>{para}</p>
-              ))}
-            </>
-          ) : (
-            <p>{story.e}</p>
-          )}
+                {story.body.slice(2).map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))}
+              </>
+            ) : (
+              <p>{story.e}</p>
+            )}
+          </div>
         </div>
 
         {/* Reader Action Bar & Author Box */}
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-5xl mx-auto mt-20">
           <ReaderInteractiveBar
             writer={writer}
             initialLikes={story.likes}

@@ -44,8 +44,8 @@ export default async function BlogReaderPage({ params }: PageProps) {
   const relatedBlogs = BLOGS.filter((b) => b.id !== blog.id).slice(0, 3);
 
   return (
-    <article className="min-h-screen bg-[var(--cream)] py-8 sm:py-14">
-      <div className="wrap max-w-4xl mx-auto">
+    <article className="min-h-screen bg-[var(--cream)] py-8 sm:py-16">
+      <div className="wrap max-w-6xl mx-auto px-4 sm:px-8">
         {/* Navigation Breadcrumb */}
         <div className="flex items-center justify-between mb-8 pb-4 border-b border-[var(--line)]">
           <Link
@@ -59,13 +59,13 @@ export default async function BlogReaderPage({ params }: PageProps) {
         </div>
 
         {/* Article Header */}
-        <header className="mb-8">
+        <header className="mb-10 max-w-5xl">
           <div className="eyebrow mb-2">Pencrack Insights</div>
-          <h1 className="font-serif text-3xl sm:text-5xl font-bold text-[var(--brown)] leading-tight tracking-tight mb-6">
+          <h1 className="font-serif text-4xl sm:text-6xl font-bold text-[var(--brown)] leading-[1.15] tracking-tight mb-6">
             {blog.t}
           </h1>
 
-          <p className="text-lg sm:text-xl text-[var(--ink)]/80 leading-relaxed italic mb-6">
+          <p className="text-xl sm:text-2xl text-[var(--ink)]/80 leading-relaxed italic mb-8">
             {blog.e}
           </p>
 
@@ -73,11 +73,11 @@ export default async function BlogReaderPage({ params }: PageProps) {
             <img
               src={writer.img}
               alt={writer.n}
-              className="w-13 h-13 sm:w-14 sm:h-14 rounded-full object-cover border-2 border-white shadow-sm flex-shrink-0"
+              className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-white shadow-sm flex-shrink-0"
             />
             <div>
-              <div className="font-serif text-lg font-bold text-[var(--brown)]">{writer.n}</div>
-              <div className="text-xs sm:text-sm text-[var(--muted)] flex items-center gap-2 flex-wrap">
+              <div className="font-serif text-xl font-bold text-[var(--brown)]">{writer.n}</div>
+              <div className="text-xs sm:text-sm text-[var(--muted)] flex items-center gap-2.5 flex-wrap mt-0.5">
                 <span>{blog.d}</span>
                 <span>•</span>
                 <span>⏱️ {blog.rt} read</span>
@@ -88,44 +88,47 @@ export default async function BlogReaderPage({ params }: PageProps) {
           </div>
         </header>
 
-        {/* Featured Image */}
-        <div className="mb-10">
+        {/* Featured Image with Generous Spacing */}
+        <div className="mb-16 sm:mb-24">
           <img
             src={coverImg}
             alt={blog.t}
-            className="w-full h-72 sm:h-[460px] object-cover rounded-[var(--r)] shadow-md"
+            className="w-full h-80 sm:h-[520px] object-cover rounded-[var(--r)] shadow-md"
           />
+          <div className="text-xs text-[var(--muted)] mt-3 italic font-sans text-center">
+            Editorial Photo · Pencrack Journal
+          </div>
         </div>
 
-        {/* Article Content */}
-        <div className="space-y-8 max-w-3xl mx-auto">
+        {/* Article Content - Wide, Spacious, Readable */}
+        <div className="max-w-4xl mx-auto space-y-12">
           {blog.sections && blog.sections.length > 0 ? (
             blog.sections.map((section, sIdx) => (
-              <section key={sIdx} className="space-y-4">
+              <section key={sIdx} className="space-y-6">
                 {section.heading && (
-                  <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[var(--brown)] pt-4 pb-1">
+                  <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[var(--brown)] pt-6 pb-2 border-b border-[var(--line)]/60">
                     {section.heading}
                   </h2>
                 )}
                 {section.paragraphs.map((para, pIdx) => (
-                  <p key={pIdx} className="text-base sm:text-lg text-[var(--ink)] leading-relaxed">
+                  <p key={pIdx} className="text-lg sm:text-xl text-[var(--ink)] leading-[2.1] sm:leading-[2.2]">
                     {para}
                   </p>
                 ))}
                 {section.quote && (
-                  <blockquote className="border-l-4 border-[var(--accent)] pl-6 py-2 my-6 italic text-[var(--brown-700)] font-serif text-xl sm:text-2xl bg-[var(--beige)]/40 rounded-r-[var(--r-sm)]">
+                  <blockquote className="border-l-4 border-[var(--accent)] pl-8 sm:pl-10 py-5 my-10 italic text-[var(--brown-700)] font-serif text-2xl sm:text-3xl leading-[1.8] bg-[var(--beige)]/50 rounded-r-[var(--r)] shadow-xs">
                     {section.quote}
                   </blockquote>
                 )}
               </section>
             ))
           ) : (
-            <p className="text-lg text-[var(--ink)] leading-relaxed">{blog.e}</p>
+            <p className="text-lg sm:text-xl text-[var(--ink)] leading-[2.1]">{blog.e}</p>
           )}
         </div>
 
         {/* Reader Action Bar & Author Box */}
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-4xl mx-auto mt-16">
           <ReaderInteractiveBar
             writer={writer}
             initialLikes={blog.likes}
