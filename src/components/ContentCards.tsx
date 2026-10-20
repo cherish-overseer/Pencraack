@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { usePencrack } from "@/context/PencrackContext";
 import { Story, Blog, Poem, Comic, Writer, ServiceItem, WRITERS, getImgUrl } from "@/data/pencrackData";
 
@@ -9,14 +11,16 @@ interface ContentCardProps {
 }
 
 export function ContentCard({ data, type }: ContentCardProps) {
-  const { openReader, openGift } = usePencrack();
+  const router = useRouter();
+  const { openGift } = usePencrack();
   const writer = WRITERS[data.w] || WRITERS[0];
   const cover = getImgUrl(data.i);
+  const href = type === "Story" ? `/stories/${data.id}` : `/blog/${data.id}`;
 
   return (
     <div
-      onClick={() => openReader(data, type)}
-      className="card group"
+      onClick={() => router.push(href)}
+      className="card group cursor-pointer"
     >
       <img
         className="cover"
@@ -48,16 +52,15 @@ export function ContentCard({ data, type }: ContentCardProps) {
         </div>
 
         <div className="card-actions">
-          <button
-            type="button"
-            className="btn btn-soft btn-sm flex-1"
+          <Link
+            href={href}
+            className="btn btn-soft btn-sm flex-1 text-center inline-flex items-center justify-center"
             onClick={(e) => {
               e.stopPropagation();
-              openReader(data, type);
             }}
           >
             Read
-          </button>
+          </Link>
           <button
             type="button"
             className="btn btn-gift btn-sm"
@@ -75,13 +78,15 @@ export function ContentCard({ data, type }: ContentCardProps) {
 }
 
 export function PoemCard({ poem }: { poem: Poem }) {
-  const { openReader, openGift } = usePencrack();
+  const router = useRouter();
+  const { openGift } = usePencrack();
   const writer = WRITERS[poem.w] || WRITERS[0];
+  const href = `/poems/${poem.id}`;
 
   return (
     <div
-      onClick={() => openReader(poem, "Poem")}
-      className="poem group"
+      onClick={() => router.push(href)}
+      className="poem group cursor-pointer"
     >
       <h3 className="group-hover:text-[var(--brown-700)] transition-colors">
         {poem.t}
@@ -111,14 +116,16 @@ export function PoemCard({ poem }: { poem: Poem }) {
 }
 
 export function ComicCard({ comic }: { comic: Comic }) {
-  const { openReader, openGift } = usePencrack();
+  const router = useRouter();
+  const { openGift } = usePencrack();
   const writer = WRITERS[comic.w] || WRITERS[0];
   const cover = getImgUrl(comic.i, 400);
+  const href = `/comics/${comic.id}`;
 
   return (
     <div
-      onClick={() => openReader(comic, "Comic")}
-      className="comic group"
+      onClick={() => router.push(href)}
+      className="comic group cursor-pointer"
     >
       <img src={cover} alt={comic.t} loading="lazy" />
       <div className="cbody">

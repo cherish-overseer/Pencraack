@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { usePencrack } from "@/context/PencrackContext";
+import Link from "next/link";
 import { BLOGS, WRITERS, getImgUrl } from "@/data/pencrackData";
 import { ContentCard } from "@/components/ContentCards";
 
@@ -20,7 +20,6 @@ const CHIPS = [
 export default function BlogPage() {
   const [activeChip, setActiveChip] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
-  const { openReader } = usePencrack();
 
   const featured = BLOGS[0];
   const featuredWriter = WRITERS[featured.w] || WRITERS[0];
@@ -98,12 +97,12 @@ export default function BlogPage() {
                   </div>
                 </div>
               </div>
-              <button
+              <Link
+                href={`/blog/${featured.id}`}
                 className="btn btn-primary self-start"
-                onClick={() => openReader(featured, "Blog")}
               >
                 Read article
-              </button>
+              </Link>
             </div>
           </div>
 

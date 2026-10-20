@@ -8,7 +8,6 @@ import MobileNav from "@/components/MobileNav";
 import GiftModal from "@/components/GiftModal";
 import ServiceRequestModal from "@/components/ServiceRequestModal";
 import AuthModal from "@/components/AuthModal";
-import ReaderModal from "@/components/ReaderModal";
 import ToastContainer from "@/components/ToastContainer";
 
 const inter = Inter({
@@ -49,7 +48,6 @@ export default function RootLayout({
           <GiftModal />
           <ServiceRequestModal />
           <AuthModal />
-          <ReaderModal />
           <ToastContainer />
         </PencrackProvider>
       </body>

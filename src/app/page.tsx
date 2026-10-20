@@ -68,31 +68,31 @@ export default function HomePage() {
           </div>
 
           <div className="hero-art">
-            <div className="hero-card ha1">
+            <Link href="/stories/s1" className="hero-card ha1 block hover:scale-[1.02] transition-transform">
               <img src={getImgUrl(0)} alt="Story cover" />
               <div className="pad">
                 <div className="tag">Story</div>
                 <h4>The Harmattan Letters</h4>
                 <div className="mini">by Adaeze N. · 8 min read</div>
               </div>
-            </div>
+            </Link>
 
-            <div className="hero-card ha2">
+            <Link href="/poems/p1" className="hero-card ha2 block hover:scale-[1.02] transition-transform">
               <img src={getImgUrl(2)} alt="Poem cover" />
               <div className="pad">
                 <div className="tag">Poetry</div>
                 <h4>Lagos at Dawn</h4>
                 <div className="mini">by Tunde O.</div>
               </div>
-            </div>
+            </Link>
 
-            <div className="hero-card ha3">
+            <Link href="/comics/c1" className="hero-card ha3 block hover:scale-[1.02] transition-transform">
               <img src={getImgUrl(8)} alt="Comic cover" />
               <div className="pad">
                 <div className="tag">Comic</div>
                 <h4>Ink &amp; Iron</h4>
               </div>
-            </div>
+            </Link>
 
             <div className="floaty" style={{ top: "-6px", right: "4%" }}>
               ❤️ 12.4k likes

@@ -1,11 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { POEMS, WRITERS, getImgUrl } from "@/data/pencrackData";
 import { PoemCard } from "@/components/ContentCards";
-import { usePencrack } from "@/context/PencrackContext";
 
 export default function PoetryPage() {
-  const { openReader } = usePencrack();
 
   const collections = [
     { title: "Love in the Time of Harmattan", count: 6, writer: WRITERS[0] },
@@ -79,20 +78,10 @@ export default function PoetryPage() {
           </div>
           <div className="grid g3">
             {collections.map((col, idx) => (
-              <div
+              <Link
                 key={col.title}
-                onClick={() =>
-                  openReader(
-                    {
-                      t: col.title,
-                      c: "Poetry Collection",
-                      w: idx,
-                      v: "Every poem in this collection explores memory, longing, and the golden silence between words.",
-                    },
-                    "Poetry Collection"
-                  )
-                }
-                className="card group"
+                href={`/poems/${POEMS[idx % POEMS.length].id}`}
+                className="card group cursor-pointer"
               >
                 <img
                   className="cover"
@@ -108,7 +97,7 @@ export default function PoetryPage() {
                     {col.count} poems · by {col.writer.n}
                   </p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
